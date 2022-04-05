@@ -1,11 +1,13 @@
-package org.howard.edu.lsp.assignment5.implementation;
+package org.howard.edu.lsp.assignment6.integerset;
 
-/**
- * @author doron.r
- */
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
-import java.util.*;
-public class IntegerSet{
+import org.howard.edu.lsp.assignment5.implementation.IntegerSetException;
+
+
+public class Integerset{
 	private ArrayList<Integer> setA = new ArrayList<>();
 
 
@@ -14,8 +16,8 @@ public class IntegerSet{
  * 
  * @param setA
  */
-	public IntegerSet() {
-		this.setA = new ArrayList<Integer>();
+	public Integerset(ArrayList<Integer> setA) {
+		this.setA = setA;
 	}
 	
 	
@@ -43,7 +45,7 @@ public class IntegerSet{
  * @return
  */
 
-	public boolean equals(IntegerSet b) {
+	public boolean equals(Integerset b) {
 		boolean equal = true;
 		for (int num: setA) {
 			if(b.contains(num)) {
@@ -133,8 +135,10 @@ public class IntegerSet{
  * @param item
  */
 	public void remove(int item) {
-		if (setA.contains(item) == true) {
-			setA.remove(item);
+		for (int i=0; i<setA.size();i++) {
+			if(setA.get(i)==item) {
+				setA.remove(i);
+			}
 		}
 	}
 	
@@ -145,15 +149,21 @@ public class IntegerSet{
  * @param intSetb
  * @return
  */
-	public IntegerSet union(IntegerSet intSetb) {
-		ArrayList<Integer> temp = new ArrayList<Integer>();
-		Set <Integer> set = new HashSet<>();
-		set.addAll(setA);
-		set.addAll(temp);
-		
-		ArrayList<Integer> set3 = new ArrayList<>(set);
-		IntegerSet set4 = new IntegerSet(set3);
-		return set4;
+	public Integerset union(Integerset intSetb) throws RuntimeException {
+		if (setA.isEmpty() || setA.isEmpty())
+		   throw new RuntimeException("Empty set in union");
+		ArrayList<Integer> temp=intSetb.getlist();
+   
+	    Set<Integer> set = new HashSet<>();
+	    set.addAll(setA);
+	    set.addAll(temp);
+	   
+	    ArrayList<Integer> list3= new ArrayList<>(set);
+	   
+	    Integerset list4= new Integerset(list3);
+	   
+	    return list4;
+   
 	}
 
 /**
@@ -161,10 +171,10 @@ public class IntegerSet{
  * @param intSetb
  * @return
  */
-	public IntegerSet intersect(IntegerSet intSetb) {
+	public Integerset intersect(Integerset intSetb) {
 		ArrayList<Integer> temp = intSetb.getlist();
 		setA.retainAll(temp);
-		IntegerSet set4 = new IntegerSet(setA);
+		Integerset set4 = new Integerset(setA);
 		return set4;
 	} 
 
@@ -173,10 +183,10 @@ public class IntegerSet{
  * @param intSetb
  * @return
  */
-public IntegerSet diff(IntegerSet intSetb) {
+public Integerset diff(Integerset intSetb) {
 	ArrayList<Integer> temp = intSetb.getlist();
 	setA.retainAll(temp);
-	IntegerSet finalSet = new IntegerSet();
+	Integerset finalSet = new Integerset(setA);
 	return finalSet;
 	
 } // set difference, i.e. s1 - s2
@@ -217,3 +227,5 @@ public IntegerSet diff(IntegerSet intSetb) {
 	
 
 }
+
+

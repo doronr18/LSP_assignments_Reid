@@ -15,8 +15,8 @@ public class Driver {
 		/**
 		  *make 2 instance of integerset class for implementation
 		 */
-		IntegerSet set1= new IntegerSet(s1);
-		IntegerSet set2= new IntegerSet(s2);
+		IntegerSet set1= new IntegerSet();
+		IntegerSet set2= new IntegerSet();
 		
 		// TODO Auto-generated method stub
 		set1.add(1);
